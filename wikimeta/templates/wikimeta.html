@@ -1,0 +1,90 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="layout.html" />
+  <xi:include href="macros.html" />
+  <?python
+    from wikimeta.wikimeta import PageMeta
+  ?>
+  <head>
+    <title>Filtered Wiki: ${combined_title}</title>
+  </head>
+
+  <body>
+    <!--<div id="ctxtnav" class="nav"></div>-->
+
+    <div id="content" class="wikimeta">
+
+      <form action="${href.wikimeta()}" method="get">
+      <div id="filtercontrols">
+        <div>
+          <label>${state_label}
+            <select id="state_id" name="state_name" onchange="this.form.submit()" >
+              <py:for each="state_option_name in state_options">
+                <option py:if="state_option_name == selected_state" selected="selected" value="${state_option_name}">${state_option_name}</option>
+                <option py:if="state_option_name != selected_state" value="${state_option_name}">${state_option_name}</option>
+              </py:for>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>${owner_label}
+            <select id="owner_id" name="owner_name" onchange="this.form.submit()" >
+              <py:for each="owner_option_name in owner_options">
+                <option py:if="owner_option_name == selected_owner" selected="selected" value="${owner_option_name}">${owner_option_name}</option>
+                <option py:if="owner_option_name != selected_owner" value="${owner_option_name}">${owner_option_name}</option>
+              </py:for>
+            </select>
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="add/update page"/>
+          <input type="text" name="newpagename" size="10" value="${newpagename}"/>
+        </div>
+        <div>
+          <p><strong>${tags_label}</strong></p>
+          <py:for each="tag_data in tags">
+              <label py:if="tag_data[1] == 'category'"><b>${tag_data[0]}</b></label>
+              <input py:if="tag_data[1] == 'unchecked'" type="checkbox" id="${tag_data[0]}_id" name="tagfilter_${tag_data[0]}"
+                onchange="this.form.submit()">${tag_data[0]}</input>
+              <input py:if="tag_data[1] == 'checked'" type="checkbox" id="${tag_data[0]}_id" name="tagfilter_${tag_data[0]}"
+                checked="checked" onchange="this.form.submit()">${tag_data[0]}</input>
+              <br/>
+          </py:for>
+        </div>
+      </div>
+
+      <div id="wikicontent">
+        <h1>${combined_title}</h1>
+          <py:for each="page in wiki_data">
+            <div id="insertedwiki">
+              <div>
+                ${page.html}
+              </div>
+              <div id="insertedmeta">
+              <div id="metanav" class="nav">
+                <ul>
+                  <li>${page.name}</li> 
+                  <li py:if="page.raisable == 'True'"><input type="submit" name="reorder_${page.priority}_${page.prev_priority}" value="&#x25B2;"/></li>
+                  <li py:if="page.lowerable == 'True'"><input type="submit" name="reorder_${page.priority}_${page.next_priority}" value="&#x25BC;"/></li>
+                  <li><a target="_blank" href="${href.wiki(page.name, action='edit')}">edit</a></li> 
+                  <li>owner: ${page.owner}</li> 
+                  <!--<li>state: ${page.state}</li> -->
+                  <li>last modified: ${page.last_modified}</li> 
+                  <li>tags:<py:for each="inserted_tag in page.tags"> ${inserted_tag}</py:for></li> 
+                </ul>
+              </div>
+            </div>
+            </div>
+          </py:for>
+      </div>
+
+    </form>
+
+
+    </div>
+  </body>
+</html>

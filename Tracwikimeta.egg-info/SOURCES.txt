@@ -1,0 +1,15 @@
+README.txt
+install.sh
+setup.py
+Tracwikimeta.egg-info/PKG-INFO
+Tracwikimeta.egg-info/SOURCES.txt
+Tracwikimeta.egg-info/dependency_links.txt
+Tracwikimeta.egg-info/entry_points.txt
+Tracwikimeta.egg-info/top_level.txt
+wikimeta/__init__.py
+wikimeta/wikimeta.py
+wikimeta/htdocs/css/wikimeta.css
+wikimeta/htdocs/images/OrthographeIcon.png
+wikimeta/templates/wikimeta.html
+wikimeta/upgrades/__init__.py
+wikimeta/upgrades/db2.py

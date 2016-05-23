@@ -1,0 +1,41 @@
+#filtercontrols {
+	float: right;
+	clear: both;
+	font-size: 10px;
+	text-align: left;
+    background: #f7f7f0;
+    border: 1px outset #eee;
+    border-radius: 1em;
+    box-shadow: .2em .2em .7em 0 #777;
+    padding: .8em;
+    position: relative;
+    margin: 0 1em 1em;
+    z-index: 2;
+}
+#filtercontrols ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 2em;
+}
+#filtercontrols input { font-size: 10px }
+#filtercontrols select { font-size: 10px }
+#filtercontrols-error {
+	color: #a00;
+	font-size: 11px;
+	margin: 0.3em 0;
+}
+#insertedwiki {
+    background: #f7f7f0;
+    border: 1px outset #eee;
+    box-shadow: .2em .2em .7em 0 #aaa;
+    padding: .8em;
+    position: relative;
+    margin: 0 1em 1em;
+}
+
+#insertedmeta {
+    color: #070;
+    font-size: 9px;
+    z-index: 1;
+}
+
