@@ -150,8 +150,8 @@ class WikiMetaPlugin(Component):
     # IRequestFilter methods
     def pre_process_request(self, req, handler):
         self.log.debug(" +++ in pre_process_request")
-        #self.log.debug(dir(req.args))
-        #self.log.debug(req.args)
+        self.log.debug(dir(req.args))
+        self.log.debug(req.args)
         if req and req.path_info.startswith('/wiki') and 'save' in req.args and 'state_name' in req.args and 'page' in req.args:
             page_meta = PageMeta(req.args.get('page'), req.args.get('owner_name'), req.args.get('state_name'), 0, time.time(), get_reporter_id(req, 'author'))
             if page_meta.save(self.env, self._get_page_meta(req.args.get('page'))):
@@ -304,6 +304,8 @@ class WikiMetaPlugin(Component):
         
         data = {}
         self.log.debug(" +++ in process_request")
+        self.log.debug(dir(req.args))
+        self.log.debug(req.args)
         # first process reordering:
         for key in req.args.keys():
             if key.startswith('reorder_'):
